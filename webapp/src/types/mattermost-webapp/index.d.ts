@@ -2,7 +2,12 @@
 // See LICENSE.txt for license information.
 
 export interface PluginRegistry {
-    registerPostTypeComponent(typeName: string, component: React.ElementType);
+  registerPostTypeComponent(typeName: string, component: React.ElementType);
+  /**
+   * Register a component at the root of the channel view of the app.
+   * Accepts a React component. Returns a unique identifier.
+   */
+  registerRootComponent(typeName: string, component: React.ElementType);
 
-    // Add more if needed from https://developers.mattermost.com/extend/plugins/webapp/reference
+  // Add more if needed from https://developers.mattermost.com/extend/plugins/webapp/reference
 }

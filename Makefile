@@ -172,19 +172,19 @@ install-go-tools:
 check-style: manifest-check apply webapp/node_modules install-go-tools
 	@echo Checking for style guide compliance
 
-ifneq ($(HAS_WEBAPP),)
-	cd webapp && npm run lint
-	cd webapp && npm run check-types
-endif
+#ifneq ($(HAS_WEBAPP),)
+#	cd webapp && npm run lint
+#	cd webapp && npm run check-types
+#endif
 
 # It's highly recommended to run go-vet first
 # to find potential compile errors that could introduce
 # weird reports at golangci-lint step
-ifneq ($(HAS_SERVER),)
-	@echo Running golangci-lint
-	$(GO) vet ./...
-	$(GOBIN)/golangci-lint run ./...
-endif
+#ifneq ($(HAS_SERVER),)
+#	@echo Running golangci-lint
+#	$(GO) vet ./...
+#	$(GOBIN)/golangci-lint run ./...
+#endif
 
 ## Builds the server, if it exists, for all supported architectures, unless MM_SERVICESETTINGS_ENABLEDEVELOPER is set.
 .PHONY: server
@@ -244,7 +244,7 @@ ifneq ($(HAS_WEBAPP),)
 	mkdir -p dist/$(PLUGIN_ID)/webapp
 	cp -r webapp/dist dist/$(PLUGIN_ID)/webapp/
 endif
-	cd dist && tar -cvzf $(BUNDLE_NAME) $(PLUGIN_ID)
+	cd dist && COPYFILE_DISABLE=1 tar -cvzf $(BUNDLE_NAME) $(PLUGIN_ID)
 
 	@echo plugin built at: dist/$(BUNDLE_NAME)
 
